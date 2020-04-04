@@ -4,16 +4,15 @@
 #Importation des librairies (works !)
 from time import *
 from math import *
+import numpy as np
+import matplotlib.pyplot as plt
+import scipy.io.wavfile as wave
+from numpy.fft import fft
 import tkinter as tk
 from tkinter import filedialog
 from tkinter import messagebox
 from tkinter import Entry
-
-import numpy as np
-import matplotlib.pyplot
-import scipy.io.wavfile as wave
-from numpy.fft import fft
-
+from scipy.io import wavfile
 
 #Partie 1
 #demande avec GUI le nombre de fichier .mp3 (works !)
@@ -68,43 +67,39 @@ tk.messagebox.showinfo(title='Programme Maella V1', message='Tous les fichiers o
 
 #Partie 3
 #Etude des .mp3 et rendu graphique
-rate,data = wave.read(file_path)
+
+fs, data = wavfile.read(str)
 n = data.size
-duree = 1.0*n/rate
+duree = (1.0*n)/(fs*2)
+print(fs,data, duree)
 
-print(rate)
-print(duree)
 
-te = 1.0/rate
+te = 1.0/fs
 t = np.zeros(n)
 for k in range(n):
     t[k] = te*k
-figure(figsize=(12,4))
-plot(t,data)
-xlabel("t (s)")
-ylabel("amplitude") 
-axis([0,0.1,data.min(),data.max()])
-grid()
-
-def tracerSpectre(data,rate,debut,duree):
-    start = int(debut*rate)
-    stop = int((debut+duree)*rate)
-    spectre = np.absolute(fft(data[start:stop]))
-    spectre = spectre/spectre.max()
-    n = spectre.size
-    freq = np.zeros(n)
-    for k in range(n):
-        freq[k] = 1.0/n*rate*k
-    vlines(freq,[0],spectre,'r')
-    xlabel('f (Hz)')
-    ylabel('A')
-    axis([0,0.5*rate,0,1])
-    grid()
-			
-
-figure(figsize=(12,4))
-tracerSpectre(data,rate,0.0,0.5)
-axis([0,5000,0,1])
+fig = plt.figure(figsize=(12,4))
+plot = plt.plot(t,data)
+xlabel = plt.xlabel("t (s)")
+ylabel = plt.ylabel("amplitude")
+axis = plt.axis([0,duree,data.min(),data.max()])
 
 
+x = [1,2,3,4,5,6,7,8,9]
+
+y = [1,4,9,6,2,1,5,6,2]
+
+fig = plt.figure(1, figsize=(5, 3))
+
+plt.plot(x, y, 'ro')
+
+plt.savefig('figsize_test0.png')
+
+plt.savefig('figsize_test1.png',dpi=100)
+
+plt.savefig('figsize_test2.png',dpi=200)
+
+plt.savefig('figsize_test3.png',dpi=50)
+
+plt.show()
 			
