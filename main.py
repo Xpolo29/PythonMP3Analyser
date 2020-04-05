@@ -66,7 +66,7 @@ while I > 0:
 tk.messagebox.showinfo(title='Programme Maella V1', message='Tous les fichiers on été selectionnés')
 
 #Partie 3
-#Etude des .mp3 et rendu graphique
+#Etude des .wav et rendu graphique
 
 fs, data = wavfile.read(str)
 n = data.size
@@ -84,22 +84,11 @@ xlabel = plt.xlabel("t (s)")
 ylabel = plt.ylabel("amplitude")
 axis = plt.axis([0,duree,data.min(),data.max()])
 
-
 x = [1,2,3,4,5,6,7,8,9]
+y = [1,2,3,4,5,6,7,8,9]
 
-y = [1,4,9,6,2,1,5,6,2]
-
-fig = plt.figure(1, figsize=(5, 3))
-
+fig = plt.figure(1, figsize=(5,3))
 plt.plot(x, y, 'ro')
-
-plt.savefig('figsize_test0.png')
-
 plt.savefig('figsize_test1.png',dpi=100)
-
-plt.savefig('figsize_test2.png',dpi=200)
-
-plt.savefig('figsize_test3.png',dpi=50)
-
 plt.show()
-			
+
